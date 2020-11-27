@@ -1,2 +1,2 @@
 Nucleotides counted
-A: 236, C: 245, G: 248, T: 207
+A: 1, C: 2, G: 3, T: 4

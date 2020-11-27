@@ -8,7 +8,7 @@ $ mkdir ~/bioinformatic-tools
 $ git clone https://github.com/LuukHenk/bioinformatic_tools.git ~/bioinformatic-tools
 ```
 
-Each tool standard uses the `os`, `re` and `sys` libraries. The tool section below shows if tools need additional libraries installed.
+Each tool standard uses the `os`, `re` and `sys` libraries. The tools section below shows if tools need additional libraries installed.
 
 ## Tools:
 All the tools can be found in the `./scripts/` folder and can be runned using python3. e.g.
