@@ -25,8 +25,8 @@ generate `./output/rosalind_dna.txt`
 All current tools and their requirements are shown below:
 
 ### Nucleotide counter
-Counts the nucleotides of dna strand
-Filename: `./script/dna.py`
+Counts the nucleotides of dna strand <br />
+Filename: `./script/dna.py` <br />
 Additional libraries used: none
 
 ## References

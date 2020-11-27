@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ Counting DNA Nucleotides """
 
-import sys
 import os
 import re
+import sys
 
 def generate_io_file_paths():
     "Generate the input- and output file paths"
