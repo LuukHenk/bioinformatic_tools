@@ -1,43 +1,34 @@
-# Bioinformatics in Rust
-
-## Author:
-- Luuk Perdaems
-
-## Status
-Version: 0.0.1 (Alpha)
+# Rosalind bioinformatics in Python3 (and in Rust)
 
 ## Installing:
 Clone repository using git:
+
 ```
 $ mkdir ~/bioinformatic-tools
 $ git clone https://github.com/LuukHenk/bioinformatic_tools.git ~/bioinformatic-tools
 ```
-Choose the tool you want to use. e.g. the DNA counter:
+
+Each tool standard uses the `os`, `re` and `sys` libraries. The tool section below shows if tools need additional libraries installed.
+
+## Tools:
+All the tools can be found in the `./scripts/` folder and can be runned using python3. e.g.
 ```
-$ cd bioinformatic-tools
-$ ./dna_nucleotide_counter/target/release/dna
+$ python3 scripts/dna.py
 ```
-Give a file path which contains DNA nucleotides, and DNA nucleotides only. e.g. `./dna_nucleotide_counter/sample_dataset.txt`.
 
-## The setup:
-### DNA counter
-The counter will output the amount of nucleotides counted (A, C, G, and T) in a specific file.
+The input file used by the tool can be found in the `./input/` folder. e.g. the file
+`./scripts/dna.py` will use the `./input/rosalind_dna.txt`
 
-## Changelog:
-### Version 0.0.1 (4 March 2020)
-- Added DNA counter tool (unstable)
+The output files can be found in the `./output/` folder. e.g. the file `./scripts/dna.py` will
+generate `./output/rosalind_dna.txt`
 
-## To do:
-### General
-- Simplification of the tool loading
+All current tools and their requirements are shown below:
 
-### DNA counter tool
-- Add more ways to find the end of the file (currently only detected by an enter)
-- Add a way to handle unknown characters
-- Add RNA counter
-- Add user input for the maximum bytes used
-- Add multithreading
+### Nucleotide counter
+Counts the nucleotides of dna strand
+Filename: `./script/dna.py`
+Additional libraries used: none
 
 ## References
+- Used [Rosalind.info](http://rosalind.info/) for obtaining the ideas for the tools
 - Got help from [Sidney Liebrand](https://github.com/SidOfc) about how to use rust
-- Used [Rosalind.info](http://rosalind.info/) for obtaining the ideas
