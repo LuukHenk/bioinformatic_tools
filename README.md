@@ -25,9 +25,14 @@ generate `./output/rosalind_dna.txt`
 All current tools and their requirements are shown below:
 
 ### Nucleotide counter
-Counts the nucleotides of dna strand <br />
+Counts the nucleotides in a DNA strand <br />
 Filename: `./script/dna.py` <br />
 Additional libraries used: none
+
+### k-mer counter
+Counts the k-mers in a DNA strand. Standard k-mer size is set at 4, but can be changed in the main function of the script <br />
+Filename: `./scripts/kmer.py` <br />
+Additional libraries used: itertools
 
 ## References
 - Used [Rosalind.info](http://rosalind.info/) for obtaining the ideas for the tools
