@@ -39,55 +39,52 @@ def save_file(filename, output):
         myfile.write(output)
         print("Saved output in '{}' ...\n-------\n".format(filename))
 
-def longest_increasing_subsequence_method_one(seq, seq_length):
-    longest_increasing_seq = [seq_length]
-    # longest_increasing_seq_len = len(longest_increasing_seq)
+def lis(seq, seq_length, decrease=False):
+    """
+        Longest increasing subsequence (lis in short) using dynaming programming.
+        Set descrease to true for longest decreasing sequence
 
-    for seq_position in range(seq_length-1):
-        for starting_match in range(seq_position + 1, seq_length):
-            current_sequence = [seq[seq_position]]
+    """
 
-            # if current_sequence[0] == seq_length \
-            # or seq_length - starting_match < longest_increasing_seq_len:
-            #     break
+    # Make a counting list for increasing/decreasing values (starting value = 1)
+    count = [1 for i in range(seq_length)]
 
-            for match_position in range(starting_match, seq_length):
-                match = seq[match_position]
+    # Count if values in range increasing/decrease
+    i, j = 1, 0
+    if decrease:
+        while i < seq_length:
+            if seq[i] < seq[j] and count[j] <= count[i]:
+                count[i] = count[j] + 1
 
-                if match > current_sequence[-1]:
-                    current_sequence.append(match)
+            j += 1
 
-                # if match == seq_length:
-                #     break
+            if j == i:
+                j = 0
+                i += 1
+    else:
+        while i < seq_length:
+            if seq[i] > seq[j] and count[j] <= count[i]:
+                count[i] = count[j] + 1
 
-            # Dit verplaatsen paar per sequence positie in plaats van match positie
-            if len(current_sequence) > len(longest_increasing_seq):
-                longest_increasing_seq = current_sequence
-                # print(current_sequence)
-                # longest_increasing_seq_len = len(longest_increasing_seq)
+            j += 1
 
-    return longest_increasing_seq
+            if j == i:
+                j = 0
+                i += 1
 
-def longest_increasing_subsequence_method_two(seq, seq_length):
-    longest_sequences = []
-    for seq_position in range(seq_length-1):
-        print(seq_position)
-        for starting_match in range(seq_position + 1, seq_length):
-            current_sequence = [seq[seq_position]]
+    # Determine the lis/lds from the counting list
+    rev_count = count[::-1]
+    k = max(rev_count) - 1
+    idx = [rev_count.index(k+1)]
+    while k > 0:
+        idx.append(rev_count.index(k, idx[-1]))
+        k -= 1
+    idx = [seq_length-1-x for x in idx]
 
-            for match_position in range(starting_match, seq_length):
-                match = seq[match_position]
-
-                if match > current_sequence[-1]:
-                    current_sequence.append(match)
-
-            longest_sequences.append(current_sequence)
-
-
-    return(max(longest_sequences, key=len))
+    return([seq[x] for x in idx[::-1]])
 
 def main():
-    " Main function for nucleotide counting"
+    " Main function for longest increasing/decreasing subsequence"
 
     # Generate file paths
     file_paths = generate_io_file_paths()
@@ -97,6 +94,12 @@ def main():
     raw_data = re.sub(r"\n", "|", raw_data).split("|")[:-1]
     seq = list(map(int, raw_data[1].split(" ")))
     seq_length = int(raw_data[0])
+
+    # Perform longest increasing/decreasing subsequence and convert to string
+    out = re.sub(r",", "", str(lis(seq, seq_length)))[1:-1]
+    out += "\n" + re.sub(r",", "", str(lis(seq, seq_length, decrease=True)))[1:-1]
+
+    save_file(file_paths["output"], out)
 
 # Run main scrips
 if __name__ == "__main__":
