@@ -47,7 +47,8 @@ def lis(seq, seq_length, decrease=False):
     """
 
     # Make a counting list for increasing/decreasing values (starting value = 1)
-    count = [1 for i in range(seq_length)]
+    count = [1]*seq_length
+    p = [-1]*seq_length
 
     # Count if values in range increasing/decrease
     i, j = 1, 0
@@ -55,6 +56,7 @@ def lis(seq, seq_length, decrease=False):
         while i < seq_length:
             if seq[i] < seq[j] and count[j] <= count[i]:
                 count[i] = count[j] + 1
+                p[i] = j
 
             j += 1
 
@@ -65,6 +67,7 @@ def lis(seq, seq_length, decrease=False):
         while i < seq_length:
             if seq[i] > seq[j] and count[j] <= count[i]:
                 count[i] = count[j] + 1
+                p[i] = j
 
             j += 1
 
@@ -72,16 +75,13 @@ def lis(seq, seq_length, decrease=False):
                 j = 0
                 i += 1
 
-    # Determine the lis/lds from the counting list
-    rev_count = count[::-1]
-    k = max(rev_count) - 1
-    idx = [rev_count.index(k+1)]
-    while k > 0:
-        idx.append(rev_count.index(k, idx[-1]))
-        k -= 1
-    idx = [seq_length-1-x for x in idx]
+    idx = count.index(max(count))
+    sub_seq = []
+    while idx != -1:
+        sub_seq.insert(0, seq[idx])
+        idx = p[idx]
 
-    return([seq[x] for x in idx[::-1]])
+    return sub_seq
 
 def main():
     " Main function for longest increasing/decreasing subsequence"
