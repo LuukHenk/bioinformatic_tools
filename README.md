@@ -34,6 +34,9 @@ Counts the k-mers in a DNA strand. Standard k-mer size is set at 4, but can be c
 Filename: `./scripts/kmer.py` <br />
 Additional libraries used: itertools
 
+### Unfinished
+- lgis
+
 ## References
 - Used [Rosalind.info](http://rosalind.info/) for obtaining the ideas for the tools
 - Got help from [Sidney Liebrand](https://github.com/SidOfc) about how to use rust

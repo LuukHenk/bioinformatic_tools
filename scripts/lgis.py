@@ -39,49 +39,15 @@ def save_file(filename, output):
         myfile.write(output)
         print("Saved output in '{}' ...\n-------\n".format(filename))
 
-def lis(seq, seq_length, decrease=False):
-    """
-        Longest increasing subsequence (lis in short) using dynaming programming.
-        Set descrease to true for longest decreasing sequence
-
-    """
-
-    # Make a counting list for increasing/decreasing values (starting value = 1)
-    count = [1]*seq_length
-    p = [-1]*seq_length
-
-    # Count if values in range increasing/decrease
-    i, j = 1, 0
-    if decrease:
-        while i < seq_length:
-            if seq[i] < seq[j] and count[j] <= count[i]:
-                count[i] = count[j] + 1
-                p[i] = j
-
-            j += 1
-
-            if j == i:
-                j = 0
-                i += 1
-    else:
-        while i < seq_length:
-            if seq[i] > seq[j] and count[j] <= count[i]:
-                count[i] = count[j] + 1
-                p[i] = j
-
-            j += 1
-
-            if j == i:
-                j = 0
-                i += 1
-
-    idx = count.index(max(count))
-    sub_seq = []
-    while idx != -1:
-        sub_seq.insert(0, seq[idx])
-        idx = p[idx]
-
-    return sub_seq
+# Method from internet
+# def lgis(seq):
+#     incr_list = [[seq[0]]]
+#     for i in range(1, len(seq)):
+#         incr_list.append(
+#             max([incr_list[j] for j in range(i) if incr_list[j][-1] < seq[i]] or [[]], key=len)
+#             + [seq[i]]
+#         )
+#     return max(incr_list, key=len)
 
 def main():
     " Main function for longest increasing/decreasing subsequence"
@@ -95,11 +61,7 @@ def main():
     seq = list(map(int, raw_data[1].split(" ")))
     seq_length = int(raw_data[0])
 
-    # Perform longest increasing/decreasing subsequence and convert to string
-    out = re.sub(r",", "", str(lis(seq, seq_length)))[1:-1]
-    out += "\n" + re.sub(r",", "", str(lis(seq, seq_length, decrease=True)))[1:-1]
-
-    save_file(file_paths["output"], out)
+    # save_file(file_paths["output"], out)
 
 # Run main scrips
 if __name__ == "__main__":
