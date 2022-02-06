@@ -39,15 +39,21 @@ def save_file(filename, output):
         myfile.write(output)
         print("Saved output in '{}' ...\n-------\n".format(filename))
 
-# Method from internet
-# def lgis(seq):
-#     incr_list = [[seq[0]]]
-#     for i in range(1, len(seq)):
-#         incr_list.append(
-#             max([incr_list[j] for j in range(i) if incr_list[j][-1] < seq[i]] or [[]], key=len)
-#             + [seq[i]]
-#         )
-#     return max(incr_list, key=len)
+def lgis(seq, n):
+    lis = [1] * n
+
+    for i in range(1, n):
+        for j in range(0, i):
+            if seq[i] > seq[j] and lis[i] < lis[j] + 1:
+                lis[i] = lis[j] + 1
+    print(lis)
+    maximum = 0
+    for i in range(n):
+        maximum = max(maximum, lis[i])
+    print(maximum)
+
+
+
 
 def main():
     " Main function for longest increasing/decreasing subsequence"
@@ -60,6 +66,9 @@ def main():
     raw_data = re.sub(r"\n", "|", raw_data).split("|")[:-1]
     seq = list(map(int, raw_data[1].split(" ")))
     seq_length = int(raw_data[0])
+    print("len: {}".format(seq_length))
+    print("seq: {}".format(seq))
+    lgis(seq, seq_length)
 
     # save_file(file_paths["output"], out)
 

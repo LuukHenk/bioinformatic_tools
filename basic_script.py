@@ -35,7 +35,7 @@ def load_file(filename):
 def save_file(filename, output):
     "Save data to a file"
 
-    with open(filename, 'w') as myfile:
+    with open(filename, "w") as myfile:
         myfile.write(output)
         print("Saved output in '{}' ...\n-------\n".format(filename))
 
